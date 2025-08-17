@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitesh Kumar Mahanta | About</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a12;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards 0.5s;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .about-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .about-section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .about-section h2 {
+            color: #4fc3f7;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #4fc3f7, transparent);
+            border-radius: 3px;
+        }
+        .about-section p, .about-section li {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .about-section ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+        .about-section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .about-section li::before {
+            content: '•';
+            color: #4fc3f7;
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .skill-category {
+            background: rgba(79, 195, 247, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(79, 195, 247, 0.1);
+            background: rgba(79, 195, 247, 0.15);
+        }
+        .skill-category h3 {
+            color: #a5d6a7;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        .skill-category h3::before {
+            content: '▹';
+            margin-right: 0.5rem;
+            color: #4fc3f7;
+        }
+        .skill-category p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        .back-button:hover::before {
+            left: 100%;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .about-section {
+                padding: 1.5rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <h1>About Me</h1>
+        
+        <div class="about-section" id="objective">
+            <h2>Career Objective</h2>
+            <p>Aspiring Data Scientist & AI/ML Engineer with strong expertise in Python, Data Analysis, and Machine Learning. Skilled in applying advanced techniques in predictive modelling, NLP, and computer vision. Experienced in building end-to-end AI solutions, from data preprocessing to model deployment, and delivering impactful real-world projects.</p>
+        </div>
+        
+        <div class="about-section" id="education">
+            <h2>Education</h2>
+            <ul>
+                <li><strong>B.Tech – Computer Science & Engineering</strong> (2022 – 2026)<br>
+                Trident Academy of Technology, Bhubaneswar<br>
+                CGPA – 7.5</li>
+                <li><strong>Gonasika Higher Secondary School, Keonjhar</strong> (2019-2021)<br>
+                CBSE (Class XII)<br>
+                Percentage – 66%</li>
+                <li><strong>Maa Tarini High School, Arsala</strong> (2017-2019)<br>
+                (Class X)<br>
+                Percentage – 70.16%</li>
+            </ul>
+        </div>
+        
+        <div class="about-section" id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <p>Python, HTML, JAVA, SQL</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Machine Learning</h3>
+                    <p>Scikit-learn, Pandas, NumPy, Matplotlib</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Analysis</h3>
+                    <p>EDA, Data Cleaning, Visualization</p>
+                </div>
+                <div class="skill-category">
+                    <h3>AI/ML Domains</h3>
+                    <p>Computer Vision, NLP, Deep Learning (Keras)</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <p>Jupyter Notebook, VS Code, GitHub</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <p>Problem-Solving, Teamwork, Leadership</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-section" id="certifications">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Machine Learning with AI – YBI Foundation</li>
+                <li>Python programming language – Ministry of MSME, Govt. of India</li>
+            </ul>
+        </div>
+        
+        <div class="about-section" id="interests">
+            <h2>Interests & Extracurricular Activities</h2>
+            <p><strong>Interests:</strong> Solving coding problems on competitive programming platforms</p>
+            <p><strong>Extracurricular Activities:</strong> Played for both TATA FC (junior level) and State Football teams for years and won some of titles with them.</p>
+        </div>
+        
+        <a href="portfolio.html" class="back-button">Back to Portfolio</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Particle animation
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#4fc3f7', '#a5d6a7', '#ffab91', '#fff59d', '#b39ddb', '#80deea'];
+            
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                particle.style.width = `${Math.random() * 4 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.position = 'absolute';
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.borderRadius = '50%';
+                particle.style.opacity = Math.random() * 0.6 + 0.1;
+                particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px currentColor`;
+                
+                particlesContainer.appendChild(particle);
+                animateParticle(particle);
+            }
+            
+            function animateParticle(element) {
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let xSpeed = (Math.random() - 0.5) * 0.3;
+                let ySpeed = (Math.random() - 0.5) * 0.3;
+                
+                function move() {
+                    x += xSpeed;
+                    y += ySpeed;
+                    
+                    if (x <= 0 || x >= 100) xSpeed *= -1;
+                    if (y <= 0 || y >= 100) ySpeed *= -1;
+                    
+                    element.style.left = `${x}vw`;
+                    element.style.top = `${y}vh`;
+                    
+                    requestAnimationFrame(move);
+                }
+                
+                move();
+            }
+            
+            // Animate sections on scroll
+            const aboutSections = document.querySelectorAll('.about-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 150);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            aboutSections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Add hover effect to skill categories
+            const skillCategories = document.querySelectorAll('.skill-category');
+            skillCategories.forEach(category => {
+                category.addEventListener('mouseenter', () => {
+                    const color = getComputedStyle(category).backgroundColor;
+                    category.style.boxShadow = `0 10px 25px ${color.replace(')', ', 0.3)').replace('rgb', 'rgba')}`;
+                });
+                category.addEventListener('mouseleave', () => {
+                    category.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
